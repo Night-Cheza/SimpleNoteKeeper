@@ -27,22 +27,22 @@ public class NoteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String query = request.getQueryString();
+		String path =  getServletContext().getRealPath("/WEB-INF/note.txt");
+
+		BufferedReader br = new BufferedReader(new FileReader(new File(path)));
+
+		String title = br.readLine();
+		String contents = br.readLine();
+
+		Note note = new Note (title, contents);
+
+		request.setAttribute("note", note);
 
 		if (query != null && query.contains("edit")) {
 			//display edit note
 			getServletContext().getRequestDispatcher("/WEB-INF/editNote.jsp").forward(request, response);
 		} else {
 			//display view note
-			String path =  getServletContext().getRealPath("/WEB-INF/note.txt");
-			BufferedReader br = new BufferedReader(new FileReader(new File(path)));
-
-			String title = br.readLine();
-			String contents = br.readLine();
-
-			Note note = new Note (title, contents);
-
-			request.setAttribute("note", note);
-
 			getServletContext().getRequestDispatcher("/WEB-INF/viewNote.jsp").forward(request, response);
 		}
 	}
@@ -61,12 +61,15 @@ public class NoteServlet extends HttpServlet {
 		String contents = request.getParameter("contents");
 
 		String path =  getServletContext().getRealPath("/WEB-INF/note.txt");
-		PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(path, false))); 
 
-		pw.println(title);
-		pw.println(contents);
+		try(PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(path, false)))){
+			pw.println(title);
+			pw.println(contents);
 
-		pw.close();
+			pw.close();
+		} catch (FileNotFoundException ex) {
+			System.out.println(ex.getMessage());
+}
 
 		Note note = new Note (title, contents);
 

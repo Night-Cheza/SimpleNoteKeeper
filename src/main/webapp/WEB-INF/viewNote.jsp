@@ -6,9 +6,10 @@
 		<title>JSP Page</title>
 	</head>
 	<body>
-		<h1>View Note</h1>
-		<p>Title: ${note.title} </p>
-		<p>Contents: ${note.contents}</p>
+		<h1>Simple Note Keeper</h1> 
+		<h2>View Note</h2>
+		<p><b>Title:</b> ${note.title} </p>
+		<p><b>Contents:</b> ${note.contents}</p>
 		
 		<a href ="note?edit = true">Edit Note</a>
 	</body>
