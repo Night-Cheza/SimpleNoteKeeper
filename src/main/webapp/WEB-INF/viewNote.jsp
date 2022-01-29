@@ -10,6 +10,6 @@
 		<p>Title: ${note.title} </p>
 		<p>Contents: ${note.contents}</p>
 		
-		<a href =" #">Edit Note</a>
+		<a href ="note?edit = true">Edit Note</a>
 	</body>
 </html>
