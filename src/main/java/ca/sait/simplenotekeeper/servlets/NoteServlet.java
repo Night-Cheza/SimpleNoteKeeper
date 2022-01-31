@@ -38,6 +38,12 @@ public class NoteServlet extends HttpServlet {
 
 		request.setAttribute("note", note);
 
+//if(query!=null && query.contains("delete"))
+
+	if(query!=null && query.contains("create")) {
+		//display create note
+		getServletContext().getRequestDispatcher("/WEB-INF/createNote.jsp").forward(request, response);
+	} else		
 		if (query != null && query.contains("edit")) {
 			//display edit note
 			getServletContext().getRequestDispatcher("/WEB-INF/editNote.jsp").forward(request, response);
@@ -59,17 +65,23 @@ public class NoteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String title = request.getParameter("title");
 		String contents = request.getParameter("contents");
+		String button = request.getParameter("btn");
 
 		String path =  getServletContext().getRealPath("/WEB-INF/note.txt");
 
 		try(PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(path, false)))){
-			pw.println(title);
-			pw.println(contents);
-
+			if(button.contentEquals("save")) {
+				pw.println(title);
+				pw.println(contents);	
+			} else {
+				title = null;
+				contents = null;
+			} 
 			pw.close();
+
 		} catch (FileNotFoundException ex) {
 			System.out.println(ex.getMessage());
-}
+		}
 
 		Note note = new Note (title, contents);
 
