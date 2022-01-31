@@ -11,6 +11,6 @@
 		<p><b>Title:</b> ${note.title} </p>
 		<p><b>Contents:</b> ${note.contents}</p>
 		
-		<a href ="note?edit = true">Edit Note</a>
+		<a href ="note?edit = true">Edit</a>
 	</body>
 </html>
