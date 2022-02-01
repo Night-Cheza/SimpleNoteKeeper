@@ -1,9 +1,3 @@
-<%-- 
-    Document   : createNote
-    Created on : 31-Jan-2022, 3:45:53 PM
-    Author     : Ivan&Leila
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

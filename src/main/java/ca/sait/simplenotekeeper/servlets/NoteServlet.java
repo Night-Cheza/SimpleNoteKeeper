@@ -70,15 +70,16 @@ public class NoteServlet extends HttpServlet {
 		String path =  getServletContext().getRealPath("/WEB-INF/note.txt");
 
 		try(PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(path, false)))){
+			//for save option
 			if(button.contentEquals("save")) {
 				pw.println(title);
 				pw.println(contents);	
 			} else {
+			//for delete option
 				title = null;
 				contents = null;
 			} 
 			pw.close();
-
 		} catch (FileNotFoundException ex) {
 			System.out.println(ex.getMessage());
 		}
