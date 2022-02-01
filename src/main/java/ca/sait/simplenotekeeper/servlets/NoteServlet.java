@@ -38,8 +38,6 @@ public class NoteServlet extends HttpServlet {
 
 		request.setAttribute("note", note);
 
-//if(query!=null && query.contains("delete"))
-
 	if(query!=null && query.contains("create")) {
 		//display create note
 		getServletContext().getRequestDispatcher("/WEB-INF/createNote.jsp").forward(request, response);
